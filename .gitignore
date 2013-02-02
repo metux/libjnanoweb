@@ -2,3 +2,7 @@
 /testserver
 /javadoc
 /tmp
+*.pc
+*.so
+*.so.*
+*.jar

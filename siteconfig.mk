@@ -1,0 +1,16 @@
+
+PREFIX?=/usr
+EXEC_PREFIX?=$(PREFIX)
+LIBDIR?=$(EXEC_PREFIX)/lib
+INCLUDEDIR?=$(EXEC_PREFIX)/include
+DATADIR?=$(EXEC_PREFIX)/share
+PKGCONFIGDIR?=$(LIBDIR)/pkgconfig
+JARDIR?=$(DATADIR)/java
+
+AR?=ar
+CC?=cc
+CJ?=gcj
+CJH?=gcjh
+LD?=ld
+CXX?=g++
+JAR?=jar

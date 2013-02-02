@@ -1,0 +1,10 @@
+prefix=@PREFIX@
+exec_prefix=@EXEC_PREFIX@
+libdir=@LIBDIR@
+includedir=@INCLUDEDIR@
+
+Name: jNanoWeb-CNI
+Description: minimalistic java webserver - CNI library
+Version: @LIBRARY_MAJOR@.@LIBRARY_MINOR@
+Libs: -L${libdir} -l@LIBRARY_NAME@
+Cflags: -I${includedir}/jnanoweb-cni -I@JARDIR@/@JAR_FILE@
