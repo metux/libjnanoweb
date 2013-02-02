@@ -47,6 +47,7 @@ public class RESTListLookupHandler implements IHandler {
 				request.replyStatus(IRequest.status_not_found, "NOT FOUND");
 			} else
 			{
+				request.replyHeader("Content-Type", "text/plain; charset=utf-8");
 				request.replyStatus(IRequest.status_ok, "OK "+list.length);
 				for (int x=0; x<list.length; x++)
 					request.replyBody(list[x]+"\n");

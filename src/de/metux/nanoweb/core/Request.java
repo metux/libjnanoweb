@@ -22,6 +22,7 @@ public class Request implements IRequest {
 	/** IO channels **/
 	public BufferedReader reader;
 	public OutputStream output;
+	public String charset = "UTF-8";
 
 	/** response data **/
 	private int reply_status_code = IRequest.status_ok;
@@ -291,10 +292,10 @@ public class Request implements IRequest {
 			return;
 
 		String str = getProtocol()+" "+reply_status_code+" "+reply_status_str+"\r\n";
-		output.write(str.getBytes());
-		output.write(reply_headers.toString().getBytes());
+		output.write(str.getBytes(charset));
+		output.write(reply_headers.toString().getBytes(charset));
 		str = "\r\n";
-		output.write(str.getBytes());
+		output.write(str.getBytes(charset));
 
 		reply_header_sent = true;
 	}
@@ -331,7 +332,7 @@ public class Request implements IRequest {
 	 */
 	public void replyBody(String s)
 	throws IOException {
-		replyBody(s.getBytes());
+		replyBody(s.getBytes(charset));
 	}
 
 	/**

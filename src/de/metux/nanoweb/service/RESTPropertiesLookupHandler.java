@@ -64,6 +64,7 @@ public class RESTPropertiesLookupHandler implements IHandler {
 					return true;
 				}
 
+				request.replyHeader("Content-Type", "text/plain; charset=utf-8");
 				request.replyStatus(IRequest.status_ok, "OK "+list.size());
 				Enumeration<?> e = list.propertyNames();
 				while (e.hasMoreElements()) {
