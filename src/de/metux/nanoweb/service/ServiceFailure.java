@@ -10,4 +10,8 @@ public class ServiceFailure extends Exception {
 	public ServiceFailure(String s) {
 		super(s);
 	}
+
+	public ServiceFailure(String s, Exception e) {
+		super(s, e);
+	}
 }
