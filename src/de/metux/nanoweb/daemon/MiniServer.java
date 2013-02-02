@@ -2,6 +2,7 @@ package de.metux.nanoweb.daemon;
 
 import de.metux.nanoweb.core.IHandler;
 import de.metux.nanoweb.core.IRequest;
+import de.metux.nanoweb.core.Log;
 import de.metux.nanoweb.core.Request;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -19,6 +20,8 @@ import java.net.Socket;
  */
 public class MiniServer {
 
+	private static final String logname = "mini-httpd";
+
 	/**
 	 * internal worker thread class
 	 */
@@ -33,7 +36,7 @@ public class MiniServer {
 		throws IOException {
 			request.replyStatus(IRequest.status_bad_request, "Bad request");
 			request.replyFinish();
-			info("BAD REQUEST: "+comment);
+			Log.info(logname, "BAD REQUEST: "+comment);
 			socket.close();
 			return false;
 		}
@@ -83,7 +86,7 @@ public class MiniServer {
 				request.replyFinish();
 				socket.close();
 			} catch (IOException e) {
-				err("IO Error: ", e);
+				Log.error(logname, "IO Error: ", e);
 			}
 		}
 	}
@@ -91,15 +94,6 @@ public class MiniServer {
 	public MiniServer(int p, IHandler h) {
 		port = p;
 		handler = h;
-	}
-
-	private void err(String msg, Exception e) {
-		System.err.println("ERR: "+msg+" "+e.toString());
-		e.printStackTrace();
-	}
-
-	private void info(String msg) {
-		System.err.println("INFO: "+msg);
 	}
 
 	private int port;
@@ -115,7 +109,7 @@ public class MiniServer {
 		try {
 			serversocket = new ServerSocket(port);
 		} catch (Exception e) {
-			err("Failed to bind listener sockt to port "+port, e);
+			Log.error(logname, "Failed to bind listener sockt to port "+port, e);
 			return;
 		}
 
@@ -123,12 +117,12 @@ public class MiniServer {
 			try {
 				Socket connectionsocket = serversocket.accept();
 				InetAddress client = connectionsocket.getInetAddress();
-				info("Connection from: "+client.getHostName());
+				Log.info(logname, "Connection from: "+client.getHostName());
 
 				ConnectionHandler handler = new ConnectionHandler(connectionsocket);
 				handler.start();
 			} catch (Exception e) {
-				err("Failed to process connection", e);
+				Log.error(logname, "Failed to process connection", e);
 			}
 		}
 	}
