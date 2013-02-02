@@ -20,6 +20,16 @@ public class StrUtil {
 	}
 
 	/**
+	 * convert null strings to ""
+	 *
+	 * @param s	string to filter
+	 * @result	if s==null returns "", otherwise s
+	 */
+	public static final String fixstr(String s) {
+		return ((s == null) ? "" : s);
+	}
+
+	/**
 	 * fixup a path string: if empty, returns "/", make sure leading "/" exists
 	 *
 	 * @param s	pathname to fixup
